@@ -19,7 +19,7 @@
         android:padding="12dp"
         android:visibility="invisible"
         android:background="@drawable/start_richang_bg"
-        android:textColor="@color/launcher_item_select"
+        android:textColor="@color/theme_color"
         android:text="开启我的日常"
         android:textSize="20dp"/>
 
