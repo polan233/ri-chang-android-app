@@ -15,7 +15,7 @@ import androidx.viewpager.widget.ViewPager;
 
 public class LauncherActivity extends FragmentActivity {
     private ViewPager viewPager;
-    private LauncherPagerAdapter adapter; //TODO 定义这个类: LauncherPagerAdapter
+    private LauncherPagerAdapter adapter;
 
     private ImageView[] tips;
     private TextView tvStartRiChang;
@@ -92,7 +92,7 @@ public class LauncherActivity extends FragmentActivity {
     public void gotoMain(){
         setNotFirst();
 
-        Intent intent = new Intent(this,MainActivity.class);
+        Intent intent = new Intent(this, TodoActivity.class);
         startActivity(intent);
         finish();
     }
