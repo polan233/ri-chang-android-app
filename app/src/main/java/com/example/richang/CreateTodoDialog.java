@@ -11,6 +11,7 @@ import android.view.Display;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -19,7 +20,7 @@ import android.widget.TextView;
 
 import java.util.Calendar;
 
-public class CreateTodoDialog extends AlertDialog {
+public class CreateTodoDialog extends Dialog {
     private Activity context;
     private View.OnClickListener okClickListener;
     private View.OnClickListener cancleClickListener;
@@ -55,7 +56,7 @@ public class CreateTodoDialog extends AlertDialog {
         m_year = c.get(Calendar.YEAR);
         m_month = c.get(Calendar.MONTH);
         m_day = c.get(Calendar.DAY_OF_MONTH);
-        tv_date.setText("点击设置待办日期");//设置TextView里的内容为日期
+        tv_date.setText(m_year+"/"+(m_month+1)+"/"+m_day);
         tv_date.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 CreateDialog(context,0).show();
@@ -89,7 +90,7 @@ public class CreateTodoDialog extends AlertDialog {
             m_year = year;
             m_month = monthOfYear;
             m_day = dayOfMonth;
-            tv_date.setText(m_year+"年"+(m_month+1)+"月"+m_day+"日");//为TextView设置文本内容，重新显示日期
+            tv_date.setText(m_year+"/"+(m_month+1)+"/"+m_day);//为TextView设置文本内容，重新显示日期
         }
     };
 
