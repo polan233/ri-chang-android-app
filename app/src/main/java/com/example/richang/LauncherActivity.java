@@ -92,7 +92,7 @@ public class LauncherActivity extends FragmentActivity {
     public void gotoMain(){
         setNotFirst();
 
-        Intent intent = new Intent(this, TodoActivity.class);
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();
     }

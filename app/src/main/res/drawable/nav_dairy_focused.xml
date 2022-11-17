@@ -3,7 +3,7 @@
     <!--背景色 -->
     <solid android:color="@color/red"/>
     <!--边框 -->
-
+    <padding android:top="5dp" android:bottom="5dp" />
     <!--弧度 -->
     <corners android:radius="10dp"/>
 </shape>

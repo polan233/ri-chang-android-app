@@ -8,6 +8,8 @@
     <LinearLayout
         android:layout_height="match_parent"
         android:layout_width="0dp"
+        android:layout_gravity="center"
+        android:gravity="center"
         android:orientation="vertical"
         android:layout_weight="3.5">
 
@@ -16,13 +18,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textStyle="bold"
+            android:layout_marginLeft="5dp"
             android:textSize="18sp"
+            android:layout_gravity="left"
+            android:textColor="@color/black"
             android:text="事件名称"/>
         <TextView
             android:id="@+id/tv_todo_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
+            android:layout_marginLeft="5dp"
+            android:textColor="@color/black"
             android:textSize="16sp"
             android:text="2022年10月17日"/>
 
@@ -32,10 +39,15 @@
 
 
     <Button
+        android:layout_margin="10dp"
         android:id="@+id/btn_todo_done"
         android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:background="@drawable/selector_btn_todo"
+        android:stateListAnimator="@animator/anim_button_click"
+        android:layout_weight="0.8"
+        android:textSize="18sp"
+        android:textColor="@color/white"
         android:text="完成">
 
     </Button>
