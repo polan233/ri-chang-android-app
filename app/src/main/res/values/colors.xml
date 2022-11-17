@@ -16,4 +16,5 @@
     <color name="background">#70FFFFCC</color>
     <color name="transparent">#68cccccc</color>
     <color name="gray">#999999</color>
+    <color name="gray_dark">#444444</color>
 </resources>

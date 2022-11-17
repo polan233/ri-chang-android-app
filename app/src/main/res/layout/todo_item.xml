@@ -4,7 +4,26 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:minHeight="60dp"
     android:orientation="horizontal">
+    <ImageView
+        android:layout_marginLeft="10dp"
+        android:layout_gravity="center"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@mipmap/todo_icon"/>
+    <Button
+        android:id="@+id/btn_todo_done"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:background="#00000000"
+        android:stateListAnimator="@animator/anim_button_click"
+        android:layout_weight="0.7"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:text="□">
+    </Button>
     <LinearLayout
         android:layout_height="match_parent"
         android:layout_width="0dp"
@@ -19,7 +38,7 @@
             android:layout_height="wrap_content"
             android:textStyle="bold"
             android:layout_marginLeft="5dp"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:layout_gravity="left"
             android:textColor="@color/black"
             android:text="事件名称"/>
@@ -29,26 +48,10 @@
             android:layout_height="wrap_content"
             android:layout_gravity="left"
             android:layout_marginLeft="5dp"
-            android:textColor="@color/black"
-            android:textSize="16sp"
+            android:textColor="@color/gray_dark"
+            android:textSize="9sp"
             android:text="2022年10月17日"/>
 
     </LinearLayout>
 
-
-
-
-    <Button
-        android:layout_margin="10dp"
-        android:id="@+id/btn_todo_done"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="@drawable/selector_btn_todo"
-        android:stateListAnimator="@animator/anim_button_click"
-        android:layout_weight="0.8"
-        android:textSize="18sp"
-        android:textColor="@color/white"
-        android:text="完成">
-
-    </Button>
 </LinearLayout>
