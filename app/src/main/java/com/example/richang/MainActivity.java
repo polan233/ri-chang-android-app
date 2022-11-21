@@ -22,6 +22,7 @@ public class MainActivity extends FragmentActivity {
     private String[] weekCharactor=new String[]{"一","二","三","四","五","六","日"};
 
     private TodoFragment todoFragment;
+    private EatFragment eatFragment;
 
     private int currentId=R.id.tv_todo;
 
@@ -79,14 +80,15 @@ public class MainActivity extends FragmentActivity {
                 transaction.show(todoFragment);
             }
         }
-//        else if(resId==R.id.tv_eat){ //TODO 其他Fragment 的添加
-//            if(eatFragment==null){
-//                eatFragment=new EatFragment();
-//                transaction.add(R.id.container,eatFragment);
-//            }else{
-//                transaction.show(eatFragment);
-//            }
-//        }
+        else if(resId==R.id.tv_eat){
+            if(eatFragment==null){
+                eatFragment=new EatFragment();
+                transaction.add(R.id.container,eatFragment);
+            }else{
+                transaction.show(eatFragment);
+            }
+        }
+        //TODO 其他Fragment 的添加
 
         transaction.commit();
     }
@@ -95,6 +97,8 @@ public class MainActivity extends FragmentActivity {
     private void hideFragments(FragmentTransaction transaction){
         if(todoFragment!=null)
             transaction.hide(todoFragment);
+        if(eatFragment!=null)
+            transaction.hide(eatFragment);
         //TODO 其他Fragment
     }
 

@@ -16,6 +16,7 @@ public class SQliteHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db){
         String sql="create table list(id INTEGER PRIMARY KEY AUTOINCREMENT,date varchar(50),name varchar(255))";
+        //TODO 给eat界面也建表,然后在eatadapter里面写相应操作
         db.execSQL(sql);
     }
 
