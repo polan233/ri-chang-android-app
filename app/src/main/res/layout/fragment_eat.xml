@@ -14,24 +14,55 @@
         android:gravity="bottom"
         android:orientation="horizontal">
         <TextView
-            android:id="@+id/tv_eat_top_cur_date"
+            android:id="@+id/tv_eat_curdate"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="当前日期"
-            android:gravity="center"
-            android:textSize="11dp"
-            android:layout_centerInParent="true"
-            android:textColor="@color/black"/>
-        <Button
-            android:id="@+id/btn_eat_show_pre"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:background="@drawable/layer_list_eat_top_button"
-            android:stateListAnimator="@animator/anim_top_button_click"
-            android:textColor="@color/black"
-            android:layout_centerHorizontal="true"
+            android:layout_height="wrap_content"
+            android:text="11/21"
             android:layout_alignParentBottom="true"
-            android:text="查看以往"/>
+            android:layout_centerHorizontal="true"/>
+        <RadioGroup
+            android:id="@+id/rg_eat"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="bottom"
+            android:orientation="horizontal">
+            <RadioButton
+                android:id="@+id/rb_eat_pre"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_marginStart="60dp"
+                android:layout_height="match_parent"
+                android:textSize="15dp"
+                android:textColor="@color/black"
+                android:stateListAnimator="@animator/anim_top_button_click"
+                android:background="@drawable/layer_list_eat_top_button"
+                android:layout_marginLeft="1dp"
+                android:layout_marginRight="10dp"
+                android:button="@null"
+                android:textAlignment="center"
+                android:text="查看以往"/>
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1.5"/>
+            <RadioButton
+                android:id="@+id/rb_eat_now"
+                android:checked="true"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:stateListAnimator="@animator/anim_top_button_click"
+                android:layout_marginEnd="60dp"
+                android:textSize="15dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="1dp"
+                android:textColor="@color/black"
+                android:background="@drawable/layer_list_eat_top_button"
+                android:button="@null"
+                android:textAlignment="center"
+                android:text="查看本日"/>
+
+        </RadioGroup>
     </RelativeLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -53,18 +84,19 @@
             android:dividerHeight="5dp"
             >
         </ListView>
+
         <Button
             android:id="@+id/btn_eat_add"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
             android:layout_marginStart="5dp"
             android:layout_marginTop="5dp"
             android:layout_marginEnd="5dp"
             android:layout_marginRight="20dp"
             android:layout_marginBottom="5dp"
-            android:layout_alignParentBottom="true"
-            android:background="@drawable/selector_btn_todo"
+            android:background="@drawable/selector_btn_eat"
             android:padding="5dp"
             android:stateListAnimator="@animator/anim_button_click"
             android:text="添加新记录"
@@ -76,13 +108,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:background="@drawable/selector_btn_todo"
+            android:background="@drawable/selector_btn_eat"
             android:stateListAnimator="@animator/anim_button_click"
             android:layout_alignParentLeft="true"
             android:layout_marginRight="20dp"
             android:padding="5dp"
             android:textColor="@color/black"
             android:textSize="18sp"
+            android:visibility="invisible"
             android:text="随机抽食物" />
 
     </RelativeLayout>

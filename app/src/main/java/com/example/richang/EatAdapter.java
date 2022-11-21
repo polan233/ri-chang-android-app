@@ -2,8 +2,11 @@ package com.example.richang;
 
 import android.animation.ObjectAnimator;
 import android.content.Context;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.drawable.Drawable;
 import android.os.Handler;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,6 +40,16 @@ public class EatAdapter extends ArrayAdapter<Eat> {
         TextView tv_detail=(TextView)view.findViewById(R.id.tv_eat_item_detail);
         ImageButton btn_delete=(ImageButton)view.findViewById(R.id.btn_eat_item_delete);
         LinearLayout ll=(LinearLayout)view.findViewById(R.id.ll_eatitem_root);
+
+
+
+        Drawable temp=eat.pic;
+        if(temp!=null){
+            iv.setBackground(eat.pic);
+        }
+        tv_title.setText(eat.title);
+        tv_detail.setText(eat.detail);
+
         btn_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

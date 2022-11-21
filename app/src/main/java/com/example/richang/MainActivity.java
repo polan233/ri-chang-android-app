@@ -1,15 +1,27 @@
 package com.example.richang;
 
+import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.Manifest;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.TextView;
 
 import java.util.Calendar;
 
 public class MainActivity extends FragmentActivity {
+    public static final int REQUEST_TAKE_PHOTO=1;
+
+
     private TextView nav_todo;
     private TextView nav_eat;
     private TextView nav_habit;
@@ -22,14 +34,29 @@ public class MainActivity extends FragmentActivity {
     private String[] weekCharactor=new String[]{"一","二","三","四","五","六","日"};
 
     private TodoFragment todoFragment;
-    private EatFragment eatFragment;
+    private EatFragment eatFragment=null;
 
     private int currentId=R.id.tv_todo;
 
     @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        switch (requestCode){
+            case REQUEST_TAKE_PHOTO:
+                Bitmap bm=(Bitmap) data.getExtras().get("data");
+                BitmapDrawable bd=new BitmapDrawable(bm);
+                if(eatFragment!=null){
+                    eatFragment.setImage(bd);
+                }
+                break;
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
 
         tv_date=(TextView)findViewById(R.id.tv_todo_top_date) ;
         nav_todo=(TextView)findViewById(R.id.tv_todo);
@@ -81,8 +108,11 @@ public class MainActivity extends FragmentActivity {
             }
         }
         else if(resId==R.id.tv_eat){
+            if(ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)!= PackageManager.PERMISSION_GRANTED){
+                ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.CAMERA},1);
+            }
             if(eatFragment==null){
-                eatFragment=new EatFragment();
+                eatFragment=EatFragment.newInstance();
                 transaction.add(R.id.container,eatFragment);
             }else{
                 transaction.show(eatFragment);

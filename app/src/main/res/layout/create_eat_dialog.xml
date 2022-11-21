@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/transparent"
+    android:id="@+id/rl_eat_dialog_root"
+    >
+    <RelativeLayout
+        android:id="@+id/rl_create_eat_main"
+        android:layout_width="match_parent"
+        android:layout_margin="50dp"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true">
+
+        <ImageView
+            android:id="@+id/ib_create_eat"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_alignParentLeft="true"
+            android:padding="0dp"
+            android:background="@mipmap/add_pic_icon"
+            android:scaleType="centerInside"
+            />
+
+        <EditText
+            android:id="@+id/et_create_eat_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="44dp"
+            android:layout_marginTop="5dp"
+            android:textStyle="bold"
+            android:layout_toRightOf="@+id/ib_create_eat"
+            android:hint="早点" />
+
+        <EditText
+            android:id="@+id/et_create_eat_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/et_create_eat_title"
+            android:layout_marginStart="0dp"
+            android:layout_marginLeft="28dp"
+            android:layout_marginTop="1dp"
+            android:layout_toEndOf="@+id/ib_create_eat"
+            android:hint="详细记录一下这一顿饭吧"
+            android:textSize="12sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rl_create_eat_main"
+        android:layout_marginTop="-48dp">
+
+        <Button
+            android:id="@+id/btn_create_eat_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="90dp"
+            android:text="取消"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/btn_create_eat_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="right"
+            android:layout_marginRight="90dp"
+            android:text="确定"
+            android:textSize="16sp" />
+    </RelativeLayout>
+
+
+</RelativeLayout>
