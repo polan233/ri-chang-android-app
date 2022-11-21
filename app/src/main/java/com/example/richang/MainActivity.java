@@ -35,6 +35,7 @@ public class MainActivity extends FragmentActivity {
 
     private TodoFragment todoFragment;
     private EatFragment eatFragment=null;
+    private DairyFragment dairyFragment=null;
 
     private int currentId=R.id.tv_todo;
 
@@ -118,6 +119,17 @@ public class MainActivity extends FragmentActivity {
                 transaction.show(eatFragment);
             }
         }
+        else if(resId==R.id.tv_dairy){
+            if(ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)!= PackageManager.PERMISSION_GRANTED){
+                ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.CAMERA},1);
+            }
+            if(dairyFragment==null){
+                dairyFragment=DairyFragment.newInstance();
+                transaction.add(R.id.container,dairyFragment);
+            }else{
+                transaction.show(dairyFragment);
+            }
+        }
         //TODO 其他Fragment 的添加
 
         transaction.commit();
@@ -129,6 +141,8 @@ public class MainActivity extends FragmentActivity {
             transaction.hide(todoFragment);
         if(eatFragment!=null)
             transaction.hide(eatFragment);
+        if(dairyFragment!=null)
+            transaction.hide(dairyFragment);
         //TODO 其他Fragment
     }
 

@@ -27,7 +27,7 @@
                 android:layout_height="match_parent"
                 android:textSize="15dp"
                 android:textColor="@color/black"
-                android:stateListAnimator="@animator/anim_top_button_click"
+                android:stateListAnimator="@animator/anim_top_button_check"
                 android:background="@drawable/layer_list_todo_top_button_selected"
                 android:layout_marginLeft="1dp"
                 android:layout_marginRight="1dp"
@@ -39,7 +39,7 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="match_parent"
-                android:stateListAnimator="@animator/anim_top_button_click"
+                android:stateListAnimator="@animator/anim_top_button_check"
 
                 android:textSize="15dp"
                 android:layout_marginLeft="1dp"
@@ -54,7 +54,7 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="match_parent"
-                android:stateListAnimator="@animator/anim_top_button_click"
+                android:stateListAnimator="@animator/anim_top_button_check"
 
                 android:layout_marginLeft="1dp"
                 android:layout_marginRight="1dp"
@@ -72,7 +72,7 @@
                 android:layout_marginLeft="1dp"
                 android:layout_marginRight="1dp"
                 android:layout_height="match_parent"
-                android:stateListAnimator="@animator/anim_top_button_click"
+                android:stateListAnimator="@animator/anim_top_button_check"
 
                 android:textSize="15dp"
                 android:textColor="@color/black"
