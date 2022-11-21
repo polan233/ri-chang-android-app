@@ -7,7 +7,7 @@ import android.util.Log;
 
 public class SQliteHelper extends SQLiteOpenHelper {
     private static final int VERSION =1;
-    private static String db_name="todoapp";
+    private static String db_name="ricahngapp";
 
     public SQliteHelper(Context context){
         super(context,db_name,null,VERSION);
@@ -16,7 +16,9 @@ public class SQliteHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db){
         String sql="create table list(id INTEGER PRIMARY KEY AUTOINCREMENT,date varchar(50),name varchar(255))";
+        db.execSQL(sql);
         //TODO 给eat界面也建表,然后在eatadapter里面写相应操作
+        sql="create table eat_list(id INTEGER PRIMARY KEY AUTOINCREMENT,date varchar(50),writeTime INTEGER,title varchar(255),detail varchar(255))";
         db.execSQL(sql);
     }
 
