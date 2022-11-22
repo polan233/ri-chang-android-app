@@ -13,13 +13,6 @@
         android:layout_height="0dp"
         android:gravity="bottom"
         android:orientation="horizontal">
-        <TextView
-            android:id="@+id/tv_eat_curdate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="11/21"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"/>
 
         <Button
             android:id="@+id/btn_dairy_pre"
@@ -28,7 +21,7 @@
             android:layout_marginEnd="25dp"
             android:layout_toStartOf="@+id/btn_dairy_choose"
             android:background="@drawable/layer_list_dairy_top_button"
-            android:stateListAnimator="@animator/anim_top_button_check"
+            android:stateListAnimator="@animator/anim_top_button_press"
             android:text="前一天"
             android:textAlignment="center"
             android:textColor="@color/black"
@@ -41,7 +34,7 @@
             android:layout_centerHorizontal="true"
             android:background="@drawable/layer_list_dairy_top_button"
             android:button="@null"
-            android:stateListAnimator="@animator/anim_top_button_check"
+            android:stateListAnimator="@animator/anim_top_button_press"
             android:text="指定日期"
             android:textAlignment="center"
             android:textColor="@color/black"
@@ -54,7 +47,7 @@
             android:layout_marginStart="25dp"
             android:layout_toEndOf="@+id/btn_dairy_choose"
             android:background="@drawable/layer_list_dairy_top_button"
-            android:stateListAnimator="@animator/anim_top_button_check"
+            android:stateListAnimator="@animator/anim_top_button_press"
             android:text="后一天"
             android:textAlignment="center"
             android:textColor="@color/black"

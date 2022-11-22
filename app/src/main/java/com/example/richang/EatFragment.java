@@ -76,7 +76,7 @@ public class EatFragment extends Fragment {
 
     private SQliteHelper sqLiteHelper;
     private SQLiteDatabase db;
-    public static final int REQUEST_CODE_TAKE_PICTURE= 1;
+
 
 
     public EatFragment() {

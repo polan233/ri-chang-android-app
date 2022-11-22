@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LinearLayout
+    android:id="@+id/ll_dairy_text_root"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="0dp"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/tv_dairy_text_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:text="  这是一段日记的内容,今天好冷好冷,还有猫冲出来了,真不怕人啊!"
+        android:padding="5dp"
+        android:textSize="16sp"/>
+</LinearLayout>

@@ -12,7 +12,8 @@
     <color name="yellow">#FFCC00</color>
     <color name="green">#33FF00</color>
     <color name="blue">#33CCFF</color>
-    <color name="red">#FF3333</color>
+    <color name="red">#fd4b4b</color>
+    <color name="red_transparent">#55fd4b4b</color>
     <color name="background">#70FFFFCC</color>
     <color name="transparent">#68cccccc</color>
     <color name="gray">#999999</color>

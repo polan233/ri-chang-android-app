@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/transparent"
+    android:id="@+id/rl_dairy_pic_dialog_root"
+    >
+    <LinearLayout
+        android:id="@+id/rl_create_dairy_pic_main"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_centerInParent="true"
+        android:background="@color/white">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="添加照片"
+            android:textColor="@color/black"
+            android:layout_margin="10dp"
+            />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray"/>
+        <ImageView
+            android:id="@+id/iv_dairy_create_pic"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@mipmap/add_pic_icon"
+            android:layout_gravity="center"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray"/>
+        <Button
+            android:id="@+id/btn_dairy_pic_from_file"
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:text="从相册选择"/>
+        <Button
+            android:id="@+id/btn_dairy_pic_from_camera"
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:text="从相机拍摄"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/btn_create_dairy_pic_cancel"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="40dp"
+                android:text="取消" />
+            <Button
+                android:id="@+id/btn_create_dairy_pic_ok"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="40dp"
+                android:text="完成" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+
+
+</RelativeLayout>

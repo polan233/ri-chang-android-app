@@ -3,9 +3,7 @@ package com.example.richang;
 
 import android.Manifest;
 import android.app.Activity;
-import android.app.DatePickerDialog;
 import android.app.Dialog;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
@@ -16,19 +14,16 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import java.util.Calendar;
 
-public class CreateEatDialog extends Dialog {
+public class CreateDairyTextDialog extends Dialog {
     private Activity context;
     private View.OnClickListener okClickListener;
     private View.OnClickListener cancleClickListener;
@@ -36,18 +31,21 @@ public class CreateEatDialog extends Dialog {
     private Button btn_ok;
     private Button btn_cancel;
     private RelativeLayout root;
-    public ImageView ib_image;
-    public EditText et_detail;
-    public EditText et_title;
+    public TextView tv_date;
+    public TextView tv_weekday;
+    public EditText et_content;
     private Calendar c;//获得日历实例
-    private int m_year,m_month,m_day;
-    public Drawable imageVar=null;
+    private int m_year,m_month,m_day,m_weekday;
+    private String[] weekCharactor = new String[]{"一", "二", "三", "四", "五", "六", "日"};
+    private String[] weekdays;
 
-    public CreateEatDialog(Activity context){
+    public Drawable image=null;
+
+    public CreateDairyTextDialog(Activity context){
         super(context);
         this.context=context;
     }
-    public CreateEatDialog(Activity context, int theme, View.OnClickListener ok, View.OnClickListener cancel){
+    public CreateDairyTextDialog(Activity context, int theme, View.OnClickListener ok, View.OnClickListener cancel){
         super(context,theme);
         this.context=context;
         this.okClickListener=ok;
@@ -56,34 +54,25 @@ public class CreateEatDialog extends Dialog {
 
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        this.setContentView(R.layout.create_eat_dialog);
-        root=(RelativeLayout)findViewById(R.id.rl_eat_dialog_root);
-        et_detail=(EditText)findViewById(R.id.et_create_eat_detail);
-        et_title=(EditText)findViewById(R.id.et_create_eat_title);
+        this.setContentView(R.layout.create_dairy_text_dialog);
+        root=(RelativeLayout)findViewById(R.id.rl_dairy_text_dialog_root);
+        tv_date=(TextView)findViewById(R.id.tv_dairy_date);
+        tv_weekday=(TextView)findViewById(R.id.tv_dairy_weekday);
+        et_content=(EditText)findViewById(R.id.et_dairy_text_context);
+        btn_ok=(Button) findViewById(R.id.btn_create_dairy_text_add);
+        btn_cancel=(Button) findViewById(R.id.btn_create_dairy_text_cancel);
 
-        ib_image=(ImageView)findViewById(R.id.ib_create_eat);
-        btn_ok=(Button) findViewById(R.id.btn_create_eat_add);
-        btn_cancel=(Button) findViewById(R.id.btn_create_eat_cancel);
-
-        ib_image.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(ContextCompat.checkSelfPermission(context, Manifest.permission.CAMERA)== PackageManager.PERMISSION_GRANTED){
-                    //ActivityCompat.requestPermissions(context,new String[]{Manifest.permission.CAMERA},1);
-                    if(imageVar!=null) imageVar=null;
-                    Intent intent=new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                    context.startActivityForResult(intent,MainActivity.REQUEST_TAKE_PHOTO_FROM_EAT);
-
-
-                }
-
-            }
-        });
+        c = Calendar.getInstance();
+        m_year = c.get(Calendar.YEAR);
+        m_month = c.get(Calendar.MONTH);
+        m_day = c.get(Calendar.DAY_OF_MONTH);
+        m_weekday = c.get(Calendar.DAY_OF_WEEK);
+        weekdays = DairyFragment.getWeekDays();
+        tv_date.setText(MainActivity.getCurDate());
+        tv_weekday.setText(MainActivity.getWeekDay());
         btn_ok.setOnClickListener(okClickListener);
         btn_cancel.setOnClickListener(cancleClickListener);
         root.setOnClickListener(cancleClickListener);
-
-
 
 
         Window dialogWindow=this.getWindow();
@@ -96,11 +85,9 @@ public class CreateEatDialog extends Dialog {
         dialogWindow.setDimAmount(0.1f);
         this.setCancelable(true);
     }
-
-
-    public void changeImage(Drawable image) {
-        imageVar=image;
-        ib_image.setBackground(image);
-        imageVar=null;
+    public void changeImage(Drawable image){
+        this.image=image;
     }
+
+
 }

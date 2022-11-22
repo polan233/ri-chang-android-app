@@ -20,6 +20,12 @@ public class SQliteHelper extends SQLiteOpenHelper {
         //TODO 给eat界面也建表,然后在eatadapter里面写相应操作
         sql="create table eat_list(id INTEGER PRIMARY KEY AUTOINCREMENT,date varchar(50),writeTime INTEGER,title varchar(255),detail varchar(255),image blob)";
         db.execSQL(sql);
+
+        sql="create table dairy_text(id INTEGER PRIMARY KEY AUTOINCREMENT,date varchar(50),writeTime INTEGER,content text)";
+        db.execSQL(sql);
+
+        sql="create table dairy_pic(id INTEGER PRIMARY KEY AUTOINCREMENT,date varchar(50),writeTime INTEGER,image blob)";
+        db.execSQL(sql);
     }
 
     @Override
