@@ -26,6 +26,14 @@ public class EatAdapter extends ArrayAdapter<Eat> {
     private List<Eat> data=null;
     private SQLiteDatabase db;
 
+    public interface ShowPopPic{
+        public void onShow(Drawable image);
+    }
+    public DairyPicAdapter.ShowPopPic showPopPic;
+    public void setOnShow(DairyPicAdapter.ShowPopPic show){
+        this.showPopPic=show;
+    }
+
     public EatAdapter(@NonNull Context context, int resource, @NonNull List<Eat> objects){ //TODO EatAdapter这里的代码还没写
         super(context,resource,objects);
         data=objects;
@@ -40,8 +48,6 @@ public class EatAdapter extends ArrayAdapter<Eat> {
         TextView tv_detail=(TextView)view.findViewById(R.id.tv_eat_item_detail);
         ImageButton btn_delete=(ImageButton)view.findViewById(R.id.btn_eat_item_delete);
         LinearLayout ll=(LinearLayout)view.findViewById(R.id.ll_eatitem_root);
-
-
 
         Drawable temp=eat.pic;
         if(temp!=null){
@@ -68,6 +74,7 @@ public class EatAdapter extends ArrayAdapter<Eat> {
                         // 注意这里还在当前线程，没有开启新的线程
                         // new Runnable(){}，只是把Runnable对象以Message形式post到UI线程里的Looper中执行，并没有新开线程。
                         //TODO 想一个合适的主键,还是需要实时更新数据库的
+                        deleteEat(eat);
                         data.remove(position);
                         notifyDataSetChanged();
                     }
@@ -75,10 +82,22 @@ public class EatAdapter extends ArrayAdapter<Eat> {
 
             }
         });
+        iv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showPopPic.onShow(iv.getBackground());
+            }
+        });
         return view;
     }
     public void setDb(SQLiteDatabase db){
         this.db=db;
+    }
+    public  void deleteEat(Eat eat){
+        if(db!=null) {
+            String str = "delete from eat_list where writeTime=?";
+            db.execSQL(str, new String[]{String.valueOf(eat.createTime)});
+        }
     }
 
 }

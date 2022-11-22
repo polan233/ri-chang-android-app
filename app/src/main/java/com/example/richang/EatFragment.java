@@ -58,10 +58,10 @@ public class EatFragment extends Fragment {
     private RadioGroup rg_eat;
     private int eatSelected=R.id.rb_eat_now;
     private TextView tv_curdate;
-
+    private PopPicDialog popPicDialog=null;
 
     //private RandomEatDialog randomEatDialog; //TODO 这个随机抽事物的弹窗没写
-    private CreateEatDialog createEatDialog=null;
+    public CreateEatDialog createEatDialog=null;
 
     private Calendar c;//获得日历实例
     private int m_year,m_month,m_day,m_weekday;
@@ -142,6 +142,12 @@ public class EatFragment extends Fragment {
 
         adapter=new EatAdapter(view.getContext(),R.layout.eat_item,data);
         adapter.setDb(db);
+        adapter.setOnShow(new DairyPicAdapter.ShowPopPic() {
+            @Override
+            public void onShow(Drawable image) {
+                showPopPicDialog(image);
+            }
+        });
         //还需要把数据库的引用传给EatAdapter
         lv.setAdapter(adapter);
         refreshEat();
@@ -185,6 +191,7 @@ public class EatFragment extends Fragment {
         data.clear();
         switch (eatSelected){
             case R.id.rb_eat_now:
+                tv_curdate.setText(todaydate);
                 readEatByDate(todaydate);
                 break;
             case R.id.rb_eat_pre:
@@ -267,5 +274,15 @@ public class EatFragment extends Fragment {
         if(createEatDialog!=null){
             createEatDialog.changeImage(image);
         }
+    }
+    private void showPopPicDialog(Drawable image){
+        popPicDialog= new PopPicDialog((MainActivity)getActivity(), R.style.CustomDialog,
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        popPicDialog.dismiss();
+                    }
+                },image);
+        popPicDialog.show();
     }
 }

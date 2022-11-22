@@ -6,85 +6,101 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/transparent"
+    android:layout_marginBottom="0dp"
     android:id="@+id/rl_dairy_text_dialog_root"
     >
-
-    <RelativeLayout
-        android:id="@+id/rl_create_dairy_text_main"
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:background="@color/background_solid"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:background="@color/white">
-
-        <TextView
-            android:id="@+id/tv_dairy_date"
-            android:layout_width="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="40dp"
+        android:orientation="vertical">
+        <RelativeLayout
+            android:id="@+id/rl_create_dairy_text_main"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:textSize="18sp"
-            android:paddingLeft="10dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
-            android:textColor="@color/black"
-            android:text="11/22"/>
+            android:layout_centerInParent="true"
+            android:background="@color/background_solid">
 
-        <TextView
-            android:id="@+id/tv_dairy_weekday"
-            android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/tv_dairy_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:paddingLeft="10dp"
+                android:text="11/22"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/tv_dairy_weekday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="10dp"
+                android:layout_toRightOf="@id/tv_dairy_date"
+                android:paddingLeft="0dp"
+                android:text="周二"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+
+            <EditText
+                android:background="@color/background_solid"
+                android:id="@+id/et_dairy_text_context"
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
+                android:layout_below="@id/tv_dairy_date"
+                android:layout_marginLeft="45dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="45dp"
+                android:gravity="top"
+                android:hint="写点什么记录一下今天吧"
+                android:paddingBottom="50dp"
+                android:textSize="14sp"
+                android:textStyle="italic" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="2dp"
-            android:layout_marginBottom="10dp"
-            android:layout_toRightOf="@id/tv_dairy_date"
-            android:paddingLeft="0dp"
-            android:text="周二"
-            android:textColor="@color/black"
-            android:textSize="20sp" />
+            android:layout_below="@+id/rl_create_dairy_text_main"
+            android:layout_alignStart="@+id/rl_create_dairy_text_main"
+            android:layout_alignLeft="@+id/rl_create_dairy_text_main"
+            android:layout_alignEnd="@+id/rl_create_dairy_text_main"
+            android:layout_alignRight="@+id/rl_create_dairy_text_main"
+            android:background="@color/background_solid">
 
-        <EditText
-            android:id="@+id/et_dairy_text_context"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tv_dairy_date"
-            android:layout_marginLeft="45dp"
-            android:layout_marginRight="45dp"
-            android:layout_marginTop="5dp"
-            android:hint="写点什么记录一下今天吧"
-            android:textSize="14sp"
-            android:textStyle="italic" />
-    </RelativeLayout>
+            <Button
+                android:id="@+id/btn_create_dairy_text_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="75dp"
+                android:paddingRight="20dp"
+                android:text="取消"
+                android:textSize="16sp" />
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/rl_create_dairy_text_main"
-        android:layout_alignStart="@+id/rl_create_dairy_text_main"
-        android:layout_alignLeft="@+id/rl_create_dairy_text_main"
-        android:layout_alignEnd="@+id/rl_create_dairy_text_main"
-        android:layout_alignRight="@+id/rl_create_dairy_text_main"
-        android:background="@color/white">
+            <Button
+                android:id="@+id/btn_create_dairy_text_add"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_gravity="right"
+                android:layout_marginRight="75dp"
+                android:text="确定"
+                android:textSize="16sp" />
+        </RelativeLayout>
+    </LinearLayout>
 
-        <Button
-            android:id="@+id/btn_create_dairy_text_cancel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="29dp"
-            android:text="取消"
-            android:textSize="16sp" />
-
-        <Button
-            android:id="@+id/btn_create_dairy_text_add"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_gravity="right"
-            android:layout_marginRight="26dp"
-            android:text="确定"
-            android:textSize="16sp" />
-    </RelativeLayout>
 
 
 </RelativeLayout>

@@ -7,7 +7,7 @@
     android:id="@+id/rl_todo_dialog_root"
     >
     <LinearLayout
-        android:background="@color/white"
+        android:background="@color/background_solid"
         android:layout_centerInParent="true"
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -17,16 +17,18 @@
             android:id="@+id/et_todo_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="完成作业"
+            android:hint="点击输入待办事项"
+            android:layout_margin="5dp"
+            android:background="@color/background_solid"
             android:textAlignment="textStart"
             android:minHeight="45dp"
             android:textSize="18sp"/>
         <TextView
-            android:layout_marginLeft="10dp"
+            android:layout_margin="5dp"
             android:id="@+id/tv_todo_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="点击输入日期"
+            android:hint="点击选择日期"
             android:minHeight="45dp"
             android:textColor="@color/black"
             android:textAlignment="textStart"

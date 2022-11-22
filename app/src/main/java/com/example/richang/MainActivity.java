@@ -56,12 +56,13 @@ public class MainActivity extends FragmentActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         switch (requestCode){
             case REQUEST_TAKE_PHOTO_FROM_EAT:
-                if(resultCode==RESULT_OK){
-                    Bitmap bm=(Bitmap) data.getExtras().get("data");
-                    BitmapDrawable bd=new BitmapDrawable(bm);
-                    if(eatFragment!=null){
-                        eatFragment.setImage(bd);
-                    }
+                try{
+                    Uri uri=eatFragment.createEatDialog.imageUri;
+                    Bitmap bitmap= BitmapFactory.decodeStream(getContentResolver().openInputStream(uri));
+                    BitmapDrawable bd=new BitmapDrawable(bitmap);
+                    eatFragment.setImage(bd);
+                }catch (Exception e){
+                    e.printStackTrace();
                 }
                 break;
             case REQUEST_TAKE_PHOTO_FROM_DAIRY:

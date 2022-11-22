@@ -183,6 +183,7 @@ public class DairyFragment extends Fragment {
             }
         });
 
+
         lv_text.setAdapter(textAdapter);
         lv_pic.setAdapter(picAdapter);
         refreshDairy();

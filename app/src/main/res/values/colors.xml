@@ -15,6 +15,7 @@
     <color name="red">#fd4b4b</color>
     <color name="red_transparent">#55fd4b4b</color>
     <color name="background">#70FFFFCC</color>
+    <color name="background_solid">#FFFFCC</color>
     <color name="transparent">#68cccccc</color>
     <color name="gray">#999999</color>
     <color name="gray_dark">#444444</color>
