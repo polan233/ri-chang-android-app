@@ -23,6 +23,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -61,6 +62,8 @@ public class DairyFragment extends Fragment {
 
     private CreateDairyTextDialog createDairyTextDialog = null;
     private CreateDairyPicDialog createDairyPicDialog = null;
+    private PopPicDialog   popPicDialog=null;
+
 
     private Calendar c;//获得日历实例
     private int m_year, m_month, m_day, m_weekday;
@@ -171,6 +174,12 @@ public class DairyFragment extends Fragment {
             @Override
             public void onTextEdit() {
                 showTextEditDialog();
+            }
+        });
+        picAdapter.setOnShow(new DairyPicAdapter.ShowPopPic() {
+            @Override
+            public void onShow(Drawable image) {
+                showPopPicDialog(image);
             }
         });
 
@@ -405,5 +414,15 @@ public class DairyFragment extends Fragment {
         drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
         drawable.draw(canvas);
         return bmp;
+    }
+    private void showPopPicDialog(Drawable image){
+        popPicDialog= new PopPicDialog((MainActivity)getActivity(), R.style.CustomDialog,
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        popPicDialog.dismiss();
+                    }
+                },image);
+        popPicDialog.show();
     }
 }

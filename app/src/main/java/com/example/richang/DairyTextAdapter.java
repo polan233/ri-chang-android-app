@@ -1,7 +1,9 @@
 package com.example.richang;
 
 import android.animation.ObjectAnimator;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
@@ -24,6 +26,8 @@ public class DairyTextAdapter extends ArrayAdapter<DairyText> {
     private List<DairyText> data=null;
     private SQLiteDatabase db;
     private DairyFragment df=null;
+    private AlertDialog alertDialog=null;
+    private AlertDialog.Builder builder;
 
     public EditTextListener meditListener;
     public interface EditTextListener{
@@ -45,7 +49,60 @@ public class DairyTextAdapter extends ArrayAdapter<DairyText> {
         View view=null;
         if (dt.type == DairyText.TYPE_ITEM) {
             view = LayoutInflater.from(getContext()).inflate(R.layout.dairy_text_item, parent, false);
+            builder=new AlertDialog.Builder(view.getContext());
             TextView tv=(TextView) view.findViewById(R.id.tv_dairy_text_content);
+            view.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    builder.setMessage("确定要删除该段文字吗?");
+                    builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    });
+                    builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            //TODO 删除
+                            deleteDairyText(dt);
+                            data.remove(position);
+                            notifyDataSetChanged();
+                        }
+                    });
+                    if(alertDialog==null){
+                        alertDialog=builder.create();
+                    }
+                    alertDialog.show();
+                    return true;
+                }
+            });
+            tv.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    builder.setMessage("确定要删除该段文字吗?");
+                    builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    });
+                    builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            //TODO 删除
+                            deleteDairyText(dt);
+                            data.remove(position);
+                            notifyDataSetChanged();
+                        }
+                    });
+                    if(alertDialog==null){
+                        alertDialog=builder.create();
+                    }
+                    alertDialog.show();
+                    return true;
+                }
+            });
 
             tv.setText(dt.content);
         } else {
@@ -68,6 +125,12 @@ public class DairyTextAdapter extends ArrayAdapter<DairyText> {
     }
     public void setFragment(DairyFragment fragment){
         this.df=fragment;
+    }
+    public  void deleteDairyText(DairyText dt){
+        if(db!=null) {
+            String str = "delete from dairy_text where writeTime=?";
+            db.execSQL(str, new String[]{String.valueOf(dt.createTime)});
+        }
     }
 
 }

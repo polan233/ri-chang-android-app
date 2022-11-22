@@ -23,6 +23,7 @@ import java.util.TimerTask;
 public class TodoAdapter extends ArrayAdapter<Todo> {
     private List<Todo> data=null;
     private SQLiteDatabase db;
+    private PopPicDialog popPicDialog=null;
 
     public TodoAdapter(@NonNull Context context, int resource, @NonNull List<Todo> objects){
         super(context,resource,objects);
