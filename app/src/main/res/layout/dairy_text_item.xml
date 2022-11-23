@@ -17,5 +17,6 @@
         android:layout_marginRight="20dp"
         android:text="  这是一段日记的内容,今天好冷好冷,还有猫冲出来了,真不怕人啊!"
         android:padding="5dp"
+        android:textStyle="italic"
         android:textSize="16sp"/>
 </LinearLayout>

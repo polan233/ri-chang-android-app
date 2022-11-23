@@ -61,12 +61,16 @@ public class MainActivity extends FragmentActivity {
 
     //侧面菜单相关
     private DrawerLayout drawerLayout;
-    private RelativeLayout rlLook,rlAbout;
+    private RelativeLayout rlLook,rlAbout,rlLike,rlSetting;
     private int currentSelectedLeftItem=-1;
     private RelativeLayout leftLookContent;
     private LinearLayout leftAboutContent;
+    private LinearLayout leftLikeContent;
+    private LinearLayout leftSettingContent;
     private ImageView lookStatus;
     private ImageView aboutStatus;
+    private ImageView likeStatus;
+    private ImageView settingStatus;
     private Bitmap leftSelectedBM = null;
     private Bitmap leftUnSelectedBM = null;
 
@@ -77,6 +81,8 @@ public class MainActivity extends FragmentActivity {
     private Button btnThemeColor2;
     private Button btnThemeColor3;
     private Button btnThemeColor4;
+    private TextView tvShowHelp;
+    private HelpDialog helpDialog=null;
 //    private
 
 
@@ -209,12 +215,19 @@ public class MainActivity extends FragmentActivity {
     private void unSelectAllLeftItem(){
         rlLook.setSelected(false);
         rlAbout.setSelected(false);
+        rlLike.setSelected(false);
+        rlSetting.setSelected(false);
 
         leftLookContent.setVisibility(View.GONE);
         leftAboutContent.setVisibility(View.GONE);
+        leftLikeContent.setVisibility(View.GONE);
+        leftSettingContent.setVisibility(View.GONE);
 
         lookStatus.setImageBitmap(leftUnSelectedBM);
         aboutStatus.setImageBitmap(leftUnSelectedBM);
+        likeStatus.setImageBitmap(leftUnSelectedBM);
+        settingStatus.setImageBitmap(leftUnSelectedBM);
+
     }
     private View.OnClickListener onLeftMenuClickListener= new View.OnClickListener() {
         @Override
@@ -232,6 +245,16 @@ public class MainActivity extends FragmentActivity {
                         rlAbout.setSelected(true);
                         leftAboutContent.setVisibility(View.VISIBLE);
                         aboutStatus.setImageBitmap(leftSelectedBM);
+                        break;
+                    case R.id.rl_like:
+                        rlLike.setSelected(true);
+                        leftLikeContent.setVisibility(View.VISIBLE);
+                        likeStatus.setImageBitmap(leftSelectedBM);
+                        break;
+                    case R.id.rl_setting:
+                        rlSetting.setSelected(true);
+                        leftSettingContent.setVisibility(View.VISIBLE);
+                        settingStatus.setImageBitmap(leftSelectedBM);
                         break;
                 }
             }else{
@@ -259,6 +282,16 @@ public class MainActivity extends FragmentActivity {
             }
         }
     };
+    private void showHelpDialog(){
+        helpDialog= new HelpDialog(this, R.style.CustomDialog,
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        helpDialog.dismiss();
+                    }
+                });
+        helpDialog.show();
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -291,12 +324,31 @@ public class MainActivity extends FragmentActivity {
         drawerLayout=(DrawerLayout)findViewById(R.id.dd_main_root) ;
         rlLook=(RelativeLayout)findViewById(R.id.rl_look);
         rlAbout=(RelativeLayout)findViewById(R.id.rl_about);
+        rlLike=(RelativeLayout)findViewById(R.id.rl_like);
+        rlSetting=(RelativeLayout)findViewById(R.id.rl_setting);
+
         rlLook.setOnClickListener(onLeftMenuClickListener);
         rlAbout.setOnClickListener(onLeftMenuClickListener);
+        rlLike.setOnClickListener(onLeftMenuClickListener);
+        rlSetting.setOnClickListener(onLeftMenuClickListener);
+
         leftLookContent=(RelativeLayout)findViewById(R.id.left_menu_look_content);
         leftAboutContent=(LinearLayout)findViewById(R.id.left_menu_about_content);
+        leftLikeContent=(LinearLayout)findViewById(R.id.left_menu_like_content) ;
+        leftSettingContent=(LinearLayout)findViewById(R.id.left_menu_setting_content);
+
         lookStatus=(ImageView)findViewById(R.id.iv_look_status);
         aboutStatus=(ImageView)findViewById(R.id.iv_about_status);
+        likeStatus=(ImageView)findViewById(R.id.iv_like_status);
+        settingStatus=(ImageView)findViewById(R.id.iv_setting_status);
+
+        tvShowHelp=(TextView)findViewById(R.id.left_menu_show_help);
+        tvShowHelp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showHelpDialog();
+            }
+        });
 
 //        btnThemeColor1.setOnClickListener(onThemeColorListener);
 //        btnThemeColor2.setOnClickListener(onThemeColorListener);

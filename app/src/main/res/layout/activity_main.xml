@@ -169,6 +169,7 @@
         android:layout_gravity="start"
         android:layout_height="match_parent"
         android:id="@+id/left_drawer"
+        android:elevation="20dp"
 
         >
         <include layout="@layout/layout_left_drawer"/>

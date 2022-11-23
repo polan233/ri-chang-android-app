@@ -272,7 +272,8 @@ public class EatFragment extends Fragment {
             m_day = dayOfMonth;
             curdate=m_year+"/"+(m_month+1)+"/"+m_day;
             tv_curdate.setText(curdate);
-
+            RadioButton jump=getActivity().findViewById(R.id.rb_eat_pre);
+            jump.setChecked(true);
             refreshEat();
 
         }
