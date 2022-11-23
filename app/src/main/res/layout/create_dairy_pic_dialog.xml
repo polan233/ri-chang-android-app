@@ -29,6 +29,7 @@
         <ImageView
             android:id="@+id/iv_dairy_create_pic"
             android:layout_width="100dp"
+            android:elevation="13dp"
             android:layout_height="100dp"
             android:background="@mipmap/add_pic_icon"
             android:layout_gravity="center"/>
@@ -38,29 +39,47 @@
             android:background="@color/gray"/>
         <Button
             android:id="@+id/btn_dairy_pic_from_file"
-            android:layout_width="200dp"
-            android:layout_height="40dp"
+            android:background="@drawable/selector_btn_dairy_dialog"
+            android:layout_margin="5dp"
+            android:textColor="@color/white"
+            android:elevation="5dp"
+            android:layout_gravity="center"
+            android:layout_width="180dp"
+            android:layout_height="30dp"
             android:text="从相册选择"/>
         <Button
             android:id="@+id/btn_dairy_pic_from_camera"
-            android:layout_width="200dp"
-            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_width="180dp"
+            android:layout_height="30dp"
+            android:elevation="5dp"
+            android:textColor="@color/white"
+            android:background="@drawable/selector_btn_dairy_dialog"
+            android:layout_margin="5dp"
             android:text="从相机拍摄"/>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="wrap_content"
             android:orientation="horizontal">
             <Button
                 android:id="@+id/btn_create_dairy_pic_cancel"
                 android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="40dp"
+                android:layout_weight="0.7"
+                android:textColor="@color/white"
+                android:elevation="5dp"
+                android:background="@drawable/selector_btn_dairy_dialog"
+                android:layout_margin="5dp"
+                android:layout_height="30dp"
                 android:text="取消" />
             <Button
                 android:id="@+id/btn_create_dairy_pic_ok"
                 android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="40dp"
+                android:layout_weight="0.7"
+                android:textColor="@color/white"
+                android:elevation="5dp"
+                android:background="@drawable/selector_btn_dairy_dialog"
+                android:layout_margin="5dp"
+                android:layout_height="30dp"
                 android:text="完成" />
         </LinearLayout>
 

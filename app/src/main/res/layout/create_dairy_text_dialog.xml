@@ -84,9 +84,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
+                android:layout_marginStart="55dp"
                 android:layout_marginLeft="75dp"
+                android:elevation="5dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/selector_btn_dairy_dialog"
+                android:gravity="center"
+                android:paddingLeft="20dp"
+                android:paddingTop="10dp"
                 android:paddingRight="20dp"
+                android:paddingBottom="10dp"
                 android:text="取消"
+                android:textColor="@color/white"
                 android:textSize="16sp" />
 
             <Button
@@ -94,9 +103,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
+                android:elevation="5dp"
                 android:layout_gravity="right"
-                android:layout_marginRight="75dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="55dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/selector_btn_dairy_dialog"
+                android:paddingLeft="20dp"
+                android:paddingTop="10dp"
+                android:paddingRight="20dp"
+                android:paddingBottom="10dp"
                 android:text="确定"
+                android:textColor="@color/white"
                 android:textSize="16sp" />
         </RelativeLayout>
     </LinearLayout>

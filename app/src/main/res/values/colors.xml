@@ -14,8 +14,11 @@
 
     <color name="theme_color_light">#FFBB86FC</color>
     <color name="yellow">#FFCC00</color>
+    <color name="yellow_transparent">#55FFCC00</color>
     <color name="green">#7ded9f</color>
+    <color name="green_transparent">#557ded9f</color>
     <color name="blue">#33CCFF</color>
+    <color name="blue_transparent">#5533CCFF</color>
     <color name="red">#fd4b4b</color>
     <color name="red_transparent">#55fd4b4b</color>
     <color name="background">#70FFFFCC</color>

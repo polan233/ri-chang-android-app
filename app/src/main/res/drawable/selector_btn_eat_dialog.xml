@@ -3,13 +3,13 @@
     <item android:state_pressed="false">//没有选中时候的样式
         <shape>
             <solid android:color="@color/green" />
-            <corners android:radius="35dp" />
+            <corners android:radius="10dp" />
         </shape>
     </item>
     <item android:state_pressed="true">//选中时候的样式
         <shape>
             <solid android:color="@color/green_transparent"></solid>
-            <corners android:radius="35dp"></corners>
+            <corners android:radius="10dp"></corners>
         </shape>
     </item>
 </selector>
