@@ -25,7 +25,7 @@ import java.util.List;
 public class DairyTextAdapter extends ArrayAdapter<DairyText> {
     private List<DairyText> data=null;
     private SQLiteDatabase db;
-    private DairyFragment df=null;
+    public DairyFragment df=null;
     private AlertDialog alertDialog=null;
     private AlertDialog.Builder builder;
 
@@ -66,8 +66,7 @@ public class DairyTextAdapter extends ArrayAdapter<DairyText> {
                         public void onClick(DialogInterface dialog, int which) {
                             //TODO 删除
                             deleteDairyText(dt);
-                            data.remove(position);
-                            notifyDataSetChanged();
+                            df.refreshDairyText();
                         }
                     });
                     if(alertDialog==null){
@@ -92,8 +91,7 @@ public class DairyTextAdapter extends ArrayAdapter<DairyText> {
                         public void onClick(DialogInterface dialog, int which) {
                             //TODO 删除
                             deleteDairyText(dt);
-                            data.remove(position);
-                            notifyDataSetChanged();
+                            df.refreshDairyText();
                         }
                     });
                     if(alertDialog==null){

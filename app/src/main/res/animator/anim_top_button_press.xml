@@ -2,9 +2,9 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:state_pressed="true">
         <set>
-            <objectAnimator android:duration="400" android:propertyName="scaleX" android:valueTo="1" />
-            <objectAnimator android:duration="50" android:propertyName="scaleY" android:valueTo="0.1" />
-            <objectAnimator android:duration="50" android:propertyName="translationY" android:valueTo="12dp" />
+            <objectAnimator android:duration="400" android:propertyName="scaleX" android:valueTo="0.9" />
+            <objectAnimator android:duration="50" android:propertyName="scaleY" android:valueTo="0.8" />
+            <objectAnimator android:duration="50" android:propertyName="translationY" android:valueTo="20dp" />
         </set>
     </item>
     <item >

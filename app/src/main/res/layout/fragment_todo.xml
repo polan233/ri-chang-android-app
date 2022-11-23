@@ -29,8 +29,8 @@
                 android:textColor="@color/black"
                 android:stateListAnimator="@animator/anim_top_button_check"
                 android:background="@drawable/layer_list_todo_top_button_selected"
-                android:layout_marginLeft="1dp"
-                android:layout_marginRight="1dp"
+                android:layout_marginLeft="3dp"
+                android:layout_marginRight="3dp"
                 android:button="@null"
                 android:textAlignment="center"
                 android:text="本日"/>
@@ -42,8 +42,8 @@
                 android:stateListAnimator="@animator/anim_top_button_check"
 
                 android:textSize="15dp"
-                android:layout_marginLeft="1dp"
-                android:layout_marginRight="1dp"
+                android:layout_marginLeft="3dp"
+                android:layout_marginRight="3dp"
                 android:textColor="@color/black"
                 android:background="@drawable/layer_list_todo_top_button_selected"
                 android:button="@null"
@@ -56,8 +56,8 @@
                 android:layout_height="match_parent"
                 android:stateListAnimator="@animator/anim_top_button_check"
 
-                android:layout_marginLeft="1dp"
-                android:layout_marginRight="1dp"
+                android:layout_marginLeft="3dp"
+                android:layout_marginRight="3dp"
                 android:textSize="15dp"
                 android:textColor="@color/black"
                 android:background="@drawable/layer_list_todo_top_button_selected"
@@ -69,8 +69,8 @@
                 android:checked="true"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:layout_marginLeft="1dp"
-                android:layout_marginRight="1dp"
+                android:layout_marginLeft="3dp"
+                android:layout_marginRight="3dp"
                 android:layout_height="match_parent"
                 android:stateListAnimator="@animator/anim_top_button_check"
 
@@ -104,20 +104,24 @@
         </ListView>
 
         <Button
-            android:layout_margin="5dp"
             android:id="@+id/btn_add"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:background="@drawable/selector_btn_todo"
-            android:stateListAnimator="@animator/anim_button_click"
             android:layout_gravity="center"
+            android:elevation="5dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
             android:layout_marginRight="20dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/selector_btn_todo"
             android:padding="5dp"
+            android:stateListAnimator="@animator/anim_button_click"
+            android:text="添加新待办"
             android:textColor="@color/black"
-            android:textSize="18sp"
-            android:text="添加新待办" />
+            android:textSize="18sp" />
 
     </RelativeLayout>
 
