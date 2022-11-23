@@ -323,10 +323,6 @@ public class DairyFragment extends Fragment {
            refreshDairyPic();
         }
 
-        @Override
-        protected void onPostExecute(Integer integer) {
-            refreshDairyPic();
-        }
     }
     public void refreshDairy() {
         picData.clear();

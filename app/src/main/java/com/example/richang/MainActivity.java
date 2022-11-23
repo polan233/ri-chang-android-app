@@ -13,10 +13,13 @@ import android.content.ContentUris;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.database.CursorWindow;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.DocumentsContract;
@@ -25,6 +28,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.lang.reflect.Field;
 import java.util.Calendar;
 
 public class MainActivity extends FragmentActivity {
@@ -51,30 +55,114 @@ public class MainActivity extends FragmentActivity {
     private int currentId=R.id.tv_todo;
 
 
+    private class HandlePicIOTaskForEat extends AsyncTask<String,BitmapDrawable,Long>{
+        @Override
+        protected Long doInBackground(String... paths) {
+            try{
+                Uri uri=eatFragment.createEatDialog.imageUri;
+                String path=UriUtils.getFileAbsolutePath(MainActivity.this,uri);
+                Bitmap bitmap= BitmapHelper.getBitmapFromUri(MainActivity.this,uri);
+                bitmap=BitmapHelper.rotateBitmap(bitmap,BitmapHelper.getBitmapDegree(path));
+                BitmapDrawable bd=new BitmapDrawable(bitmap);
+                publishProgress(bd);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+            return null;
+        }
 
+        @Override
+        protected void onProgressUpdate(BitmapDrawable... bd) {
+            eatFragment.setImage(bd[0]);
+        }
+    }
+    private class HandlePicIOTaskForDairy extends AsyncTask<Uri,BitmapDrawable,Long>{
+        @Override
+        protected Long doInBackground(Uri... uris) {
+            try {
+                Uri uri = dairyFragment.imageUri;
+                String path=UriUtils.getFileAbsolutePath(MainActivity.this,uri);
+                Bitmap bitmap= BitmapHelper.getBitmapFromUri(MainActivity.this,uri);
+                bitmap=BitmapHelper.rotateBitmap(bitmap,BitmapHelper.getBitmapDegree(path));
+                BitmapDrawable bd = new BitmapDrawable(bitmap);
+                publishProgress(bd);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onProgressUpdate(BitmapDrawable... bd) {
+            dairyFragment.setImage(bd[0]);
+        }
+    }
+    @TargetApi(19)
+    private  void handleImageOnKitKat(Intent data) {
+        String imagePath = null;
+        Uri uri = data.getData();
+        if (DocumentsContract.isDocumentUri(this, uri)) {
+            // 如果是document类型的Uri，则通过document id处理
+            String docId = DocumentsContract.getDocumentId(uri);
+            if ("com.android.providers.media.documents".equals(uri.getAuthority())) {
+                String id = docId.split(":")[1];
+                // 解析出数字格式的id
+                String selection = MediaStore.Images.Media._ID + "=" + id;
+                imagePath = getImagePath(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, selection);
+            } else if ("com.android.providers.downloads.documents".equals(uri.getAuthority())) {
+                Uri contentUri = ContentUris.withAppendedId(Uri.parse("content: //downloads/public_downloads"), Long.valueOf(docId));
+                imagePath = getImagePath(contentUri, null);
+            }
+        } else if ("content".equalsIgnoreCase(uri.getScheme())) {
+            // 如果是content类型的Uri，则使用普通方式处理
+            imagePath = getImagePath(uri, null);
+        } else if ("file".equalsIgnoreCase(uri.getScheme())) {
+            // 如果是file类型的Uri，直接获取图片路径即可
+            imagePath = uri.getPath();
+        }
+        if (imagePath != null) {
+           new HandlePickPicIOTaskForDairy().execute(imagePath);
+        } else {
+            Toast.makeText(this, "获取相册图片失败", Toast.LENGTH_SHORT).show();
+        }
+    }
+    private void handleImageBeforeKitKat(Intent data) {
+        Uri uri = data.getData();
+        String imagePath = getImagePath(uri, null);
+        if (imagePath != null) {
+            new HandlePickPicIOTaskForDairy().execute(imagePath);
+        } else {
+            Toast.makeText(this, "获取相册图片失败", Toast.LENGTH_SHORT).show();
+        }
+    }
+    private class HandlePickPicIOTaskForDairy extends AsyncTask<String, Drawable,Long>{
+
+        @Override
+        protected Long doInBackground(String... objects) {
+            String imagePath=objects[0];
+            if (imagePath != null) {
+                Bitmap bitmap = BitmapFactory.decodeFile(imagePath);
+                BitmapDrawable bd=new BitmapDrawable(bitmap);
+                publishProgress(bd);
+            }
+            return null;
+        }
+
+        @Override
+        protected void onProgressUpdate(Drawable... values) {
+            dairyFragment.setImage(values[0]);
+        }
+    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         switch (requestCode){
             case REQUEST_TAKE_PHOTO_FROM_EAT:
-                try{
-                    Uri uri=eatFragment.createEatDialog.imageUri;
-                    Bitmap bitmap= BitmapFactory.decodeStream(getContentResolver().openInputStream(uri));
-                    BitmapDrawable bd=new BitmapDrawable(bitmap);
-                    eatFragment.setImage(bd);
-                }catch (Exception e){
-                    e.printStackTrace();
-                }
+                if(resultCode==RESULT_OK)
+                    new HandlePicIOTaskForEat().execute();
                 break;
             case REQUEST_TAKE_PHOTO_FROM_DAIRY:
                 if(resultCode==RESULT_OK){
-                    try{
-                        Uri uri=dairyFragment.imageUri;
-                        Bitmap bitmap= BitmapFactory.decodeStream(getContentResolver().openInputStream(uri));
-                        BitmapDrawable bd=new BitmapDrawable(bitmap);
-                        dairyFragment.setImage(bd);
-                    }catch (Exception e){
-                        e.printStackTrace();
-                    }
+                    new HandlePicIOTaskForDairy().execute();
                 }
                 break;
             case REQUEST_PICK_PHOTO_TO_DAIRY:
@@ -95,6 +183,26 @@ public class MainActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        if(ContextCompat.checkSelfPermission(this,
+                Manifest.permission.CAMERA)!= PackageManager.PERMISSION_GRANTED
+        ||ContextCompat.checkSelfPermission(this,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
+        ||ContextCompat.checkSelfPermission(this,
+                Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)
+        {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.CAMERA,
+                            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                            Manifest.permission.READ_EXTERNAL_STORAGE},1);
+        }
+        try {
+            Field field = CursorWindow.class.getDeclaredField("sCursorWindowSize");
+            field.setAccessible(true);
+            field.set(null, 100 * 1024 * 1024); //the 100MB is the new size
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
 
 
@@ -148,9 +256,9 @@ public class MainActivity extends FragmentActivity {
             }
         }
         else if(resId==R.id.tv_eat){
-            if(ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)!= PackageManager.PERMISSION_GRANTED){
-                ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.CAMERA},1);
-            }
+//            if(ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)!= PackageManager.PERMISSION_GRANTED){
+//                ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.CAMERA},1);
+//            }
             if(eatFragment==null){
                 eatFragment=EatFragment.newInstance();
                 transaction.add(R.id.container,eatFragment);
@@ -159,13 +267,17 @@ public class MainActivity extends FragmentActivity {
             }
         }
         else if(resId==R.id.tv_dairy){
-            if(ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)!= PackageManager.PERMISSION_GRANTED){
-                ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.CAMERA},1);
-            }
-            if (ContextCompat.checkSelfPermission(MainActivity.this,
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 101);
-            }
+//            if(ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)!= PackageManager.PERMISSION_GRANTED){
+//                ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.CAMERA},1);
+//            }
+//            if (ContextCompat.checkSelfPermission(MainActivity.this,
+//                    Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+//                ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 101);
+//            }
+//            if (ContextCompat.checkSelfPermission(MainActivity.this,
+//                    Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+//                ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 101);
+//            }
             if(dairyFragment==null){
                 dairyFragment=DairyFragment.newInstance();
                 transaction.add(R.id.container,dairyFragment);
@@ -225,36 +337,6 @@ public class MainActivity extends FragmentActivity {
         int m_weekday=c.get(Calendar.DAY_OF_WEEK);
         return " 周"+weekCharactor[m_weekday-1];
     }
-    @TargetApi(19)
-    private void handleImageOnKitKat(Intent data) {
-        String imagePath = null;
-        Uri uri = data.getData();
-        if (DocumentsContract.isDocumentUri(this, uri)) {
-            // 如果是document类型的Uri，则通过document id处理
-            String docId = DocumentsContract.getDocumentId(uri);
-            if ("com.android.providers.media.documents".equals(uri.getAuthority())) {
-                String id = docId.split(":")[1];
-                // 解析出数字格式的id
-                String selection = MediaStore.Images.Media._ID + "=" + id;
-                imagePath = getImagePath(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, selection);
-            } else if ("com.android.providers.downloads.documents".equals(uri.getAuthority())) {
-                Uri contentUri = ContentUris.withAppendedId(Uri.parse("content: //downloads/public_downloads"), Long.valueOf(docId));
-                imagePath = getImagePath(contentUri, null);
-            }
-        } else if ("content".equalsIgnoreCase(uri.getScheme())) {
-            // 如果是content类型的Uri，则使用普通方式处理
-            imagePath = getImagePath(uri, null);
-        } else if ("file".equalsIgnoreCase(uri.getScheme())) {
-            // 如果是file类型的Uri，直接获取图片路径即可
-            imagePath = uri.getPath();
-        }
-        handleImage(imagePath);
-    }
-    private void handleImageBeforeKitKat(Intent data) {
-        Uri uri = data.getData();
-        String imagePath = getImagePath(uri, null);
-        handleImage(imagePath);
-    }
 
     @SuppressLint("Range")
     private String getImagePath(Uri uri, String selection) {
@@ -270,14 +352,5 @@ public class MainActivity extends FragmentActivity {
         return path;
     }
 
-    private void handleImage(String imagePath) {
-        if (imagePath != null) {
-            Bitmap bitmap = BitmapFactory.decodeFile(imagePath);
-            BitmapDrawable bd=new BitmapDrawable(bitmap);
-            dairyFragment.setImage(bd);
-        } else {
-            Toast.makeText(this, "获取相册图片失败", Toast.LENGTH_SHORT).show();
-        }
-    }
 
 }
