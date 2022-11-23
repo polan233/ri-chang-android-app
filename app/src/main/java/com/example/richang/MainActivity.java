@@ -3,6 +3,7 @@ package com.example.richang;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -25,6 +26,7 @@ import android.os.Bundle;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.view.View;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -53,6 +55,12 @@ public class MainActivity extends FragmentActivity {
     private DairyFragment dairyFragment=null;
 
     private int currentId=R.id.tv_todo;
+
+    //侧面菜单相关
+    private DrawerLayout drawerLayout;
+    private RelativeLayout rlLook,rlAbout;
+    private int currentSelectedLeftItem;
+    private ContentFragment contentFragment;
 
 
     private class HandlePicIOTaskForEat extends AsyncTask<String,BitmapDrawable,Long>{
