@@ -60,7 +60,7 @@ public class LauncherActivity extends FragmentActivity {
 
         //初始化底部翻页显示的小横线那堆的控件
         ViewGroup group=(ViewGroup) findViewById(R.id.ll_viewGroup);
-        tips=new ImageView[5];
+        tips=new ImageView[4];
         for(int i=0;i< tips.length;i++){
             ImageView imageView=new ImageView(this);
             if(i==0){

@@ -16,7 +16,7 @@ public class LauncherPagerAdapter extends PagerAdapter {
 
     private List<View> views;
 
-    private int[] images=new int[]{R.mipmap.tutorial_1,R.mipmap.tutorial_2,
+    private int[] images=new int[]{R.mipmap.tutorial_1,
             R.mipmap.tutorial_3,R.mipmap.tutorial_4,R.mipmap.tutorial_5};
 
     public LauncherPagerAdapter(Context context){

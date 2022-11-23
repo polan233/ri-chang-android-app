@@ -26,7 +26,8 @@
                 android:layout_weight="1"
                 android:layout_height="match_parent"
                 android:textSize="15dp"
-                android:textColor="@color/black"
+                android:elevation="5dp"
+                android:textColor="@color/white"
                 android:stateListAnimator="@animator/anim_top_button_check"
                 android:background="@drawable/layer_list_todo_top_button_selected"
                 android:layout_marginLeft="3dp"
@@ -40,11 +41,11 @@
                 android:layout_weight="1"
                 android:layout_height="match_parent"
                 android:stateListAnimator="@animator/anim_top_button_check"
-
+                android:elevation="5dp"
                 android:textSize="15dp"
                 android:layout_marginLeft="3dp"
                 android:layout_marginRight="3dp"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:background="@drawable/layer_list_todo_top_button_selected"
                 android:button="@null"
                 android:textAlignment="center"
@@ -55,11 +56,11 @@
                 android:layout_weight="1"
                 android:layout_height="match_parent"
                 android:stateListAnimator="@animator/anim_top_button_check"
-
+                android:elevation="5dp"
                 android:layout_marginLeft="3dp"
                 android:layout_marginRight="3dp"
                 android:textSize="15dp"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:background="@drawable/layer_list_todo_top_button_selected"
                 android:button="@null"
                 android:textAlignment="center"
@@ -73,9 +74,9 @@
                 android:layout_marginRight="3dp"
                 android:layout_height="match_parent"
                 android:stateListAnimator="@animator/anim_top_button_check"
-
+                android:elevation="5dp"
                 android:textSize="15dp"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:background="@drawable/layer_list_todo_top_button_selected"
                 android:button="@null"
                 android:textAlignment="center"
@@ -120,7 +121,7 @@
             android:padding="5dp"
             android:stateListAnimator="@animator/anim_button_click"
             android:text="添加新待办"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="18sp" />
 
     </RelativeLayout>

@@ -23,8 +23,9 @@
             android:background="@drawable/layer_list_dairy_top_button"
             android:stateListAnimator="@animator/anim_top_button_press"
             android:text="前一天"
+            android:elevation="5dp"
             android:textAlignment="center"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="15dp" />
 
         <Button
@@ -34,10 +35,11 @@
             android:layout_centerHorizontal="true"
             android:background="@drawable/layer_list_dairy_top_button"
             android:button="@null"
+            android:elevation="5dp"
             android:stateListAnimator="@animator/anim_top_button_press"
             android:text="指定日期"
             android:textAlignment="center"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="15dp" />
 
         <Button
@@ -49,8 +51,9 @@
             android:background="@drawable/layer_list_dairy_top_button"
             android:stateListAnimator="@animator/anim_top_button_press"
             android:text="后一天"
+            android:elevation="5dp"
             android:textAlignment="center"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="15dp" />
     </RelativeLayout>
     <View
