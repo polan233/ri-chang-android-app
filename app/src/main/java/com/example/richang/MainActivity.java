@@ -26,6 +26,9 @@ import android.os.Bundle;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -59,8 +62,23 @@ public class MainActivity extends FragmentActivity {
     //侧面菜单相关
     private DrawerLayout drawerLayout;
     private RelativeLayout rlLook,rlAbout;
-    private int currentSelectedLeftItem;
-    private ContentFragment contentFragment;
+    private int currentSelectedLeftItem=-1;
+    private RelativeLayout leftLookContent;
+    private LinearLayout leftAboutContent;
+    private ImageView lookStatus;
+    private ImageView aboutStatus;
+    private Bitmap leftSelectedBM = null;
+    private Bitmap leftUnSelectedBM = null;
+
+    public int[] themeColors={0xFF6200EE};
+    public int[] themeColorsLights={0xFFBB86FC};
+    public int curThemeColor=0;
+    private Button btnThemeColor1;
+    private Button btnThemeColor2;
+    private Button btnThemeColor3;
+    private Button btnThemeColor4;
+//    private
+
 
 
     private class HandlePicIOTaskForEat extends AsyncTask<String,BitmapDrawable,Long>{
@@ -187,10 +205,67 @@ public class MainActivity extends FragmentActivity {
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
+
+    private void unSelectAllLeftItem(){
+        rlLook.setSelected(false);
+        rlAbout.setSelected(false);
+
+        leftLookContent.setVisibility(View.GONE);
+        leftAboutContent.setVisibility(View.GONE);
+
+        lookStatus.setImageBitmap(leftUnSelectedBM);
+        aboutStatus.setImageBitmap(leftUnSelectedBM);
+    }
+    private View.OnClickListener onLeftMenuClickListener= new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            if(currentSelectedLeftItem!=v.getId()){
+                currentSelectedLeftItem=v.getId();
+                unSelectAllLeftItem(); //TODO 取消选中,隐藏内容菜单,设置箭头图片
+                switch(v.getId()){
+                    case R.id.rl_look:
+                        rlLook.setSelected(true);
+                        leftLookContent.setVisibility(View.VISIBLE);
+                        lookStatus.setImageBitmap(leftSelectedBM);
+                        break;
+                    case R.id.rl_about:
+                        rlAbout.setSelected(true);
+                        leftAboutContent.setVisibility(View.VISIBLE);
+                        aboutStatus.setImageBitmap(leftSelectedBM);
+                        break;
+                }
+            }else{
+                currentSelectedLeftItem=-1;
+                unSelectAllLeftItem();
+            }
+        }
+    };
+    private View.OnClickListener onThemeColorListener=new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()){
+                case R.id.left_menu_btn_theme_color1:
+
+                    break;
+                case R.id.left_menu_btn_theme_color2:
+
+                    break;
+                case R.id.left_menu_btn_theme_color3:
+
+                    break;
+                case R.id.left_menu_btn_theme_color4:
+
+                    break;
+            }
+        }
+    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        leftSelectedBM = BitmapFactory.decodeResource(getResources(), R.mipmap.left_menu_item_selected);
+        leftUnSelectedBM = BitmapFactory.decodeResource(getResources(), R.mipmap.left_menu_item_unselected);
 
         if(ContextCompat.checkSelfPermission(this,
                 Manifest.permission.CAMERA)!= PackageManager.PERMISSION_GRANTED
@@ -213,6 +288,20 @@ public class MainActivity extends FragmentActivity {
         }
 
 
+        drawerLayout=(DrawerLayout)findViewById(R.id.dd_main_root) ;
+        rlLook=(RelativeLayout)findViewById(R.id.rl_look);
+        rlAbout=(RelativeLayout)findViewById(R.id.rl_about);
+        rlLook.setOnClickListener(onLeftMenuClickListener);
+        rlAbout.setOnClickListener(onLeftMenuClickListener);
+        leftLookContent=(RelativeLayout)findViewById(R.id.left_menu_look_content);
+        leftAboutContent=(LinearLayout)findViewById(R.id.left_menu_about_content);
+        lookStatus=(ImageView)findViewById(R.id.iv_look_status);
+        aboutStatus=(ImageView)findViewById(R.id.iv_about_status);
+
+//        btnThemeColor1.setOnClickListener(onThemeColorListener);
+//        btnThemeColor2.setOnClickListener(onThemeColorListener);
+//        btnThemeColor3.setOnClickListener(onThemeColorListener);
+//        btnThemeColor4.setOnClickListener(onThemeColorListener);
 
         tv_date=(TextView)findViewById(R.id.tv_todo_top_date) ;
         nav_todo=(TextView)findViewById(R.id.tv_todo);
@@ -315,19 +404,27 @@ public class MainActivity extends FragmentActivity {
         nav_eat.setSelected(false);
         nav_habit.setSelected(false);
         nav_dairy.setSelected(false);
+//        nav_todo.setBackgroundColor(themeColors[curThemeColor]);
+//        nav_eat.setBackgroundColor(themeColors[curThemeColor]);
+//        nav_habit.setBackgroundColor(themeColors[curThemeColor]);
+//        nav_dairy.setBackgroundColor(themeColors[curThemeColor]);
 
         switch (resId){
             case R.id.tv_todo:
                 nav_todo.setSelected(true);
+               // nav_todo.setBackgroundColor(0xFFCC00);
                 break;
             case R.id.tv_eat:
                 nav_eat.setSelected(true);
+               // nav_eat.setBackgroundColor(0x7ded9f);
                 break;
             case R.id.tv_habit:
                 nav_habit.setSelected(true);
+               // nav_habit.setBackgroundColor(0x33CCFF);
                 break;
             case R.id.tv_dairy:
                 nav_dairy.setSelected(true);
+               // nav_dairy.setBackgroundColor(0xfd4b4b);
                 break;
         }
 
