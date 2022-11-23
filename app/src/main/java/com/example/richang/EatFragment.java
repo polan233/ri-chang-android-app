@@ -12,6 +12,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -168,7 +169,7 @@ public class EatFragment extends Fragment {
 
                         Eat item = new Eat(pic, title, detail, datetime);
                         addEat(item);
-                        refreshEat();
+                        //refreshEat(); 异步刷新
 
                         createEatDialog.dismiss();
                     }
@@ -217,16 +218,30 @@ public class EatFragment extends Fragment {
         adapter.notifyDataSetChanged();
     }
     public void addEat(Eat eat){
-        ContentValues values=new ContentValues();
-        values.put("date",todaydate);
-        values.put("writeTime",eat.createTime);
-        values.put("title",eat.title);
-        values.put("detail",eat.detail);
-        Bitmap bmp=getBitmapFromDrawable(eat.pic);
-        ByteArrayOutputStream os = new ByteArrayOutputStream();
-        bmp.compress(Bitmap.CompressFormat.PNG,100,os);
-        values.put("image",os.toByteArray());
-        db.insert("eat_list","id",values);
+       new InsetEatPicTask().execute(eat);
+    }
+    private class InsetEatPicTask extends AsyncTask<Eat,Integer,Integer> {
+        @Override
+        protected Integer doInBackground(Eat[] objects) {
+            Eat eat=objects[0];
+            ContentValues values=new ContentValues();
+            values.put("date",todaydate);
+            values.put("writeTime",eat.createTime);
+            values.put("title",eat.title);
+            values.put("detail",eat.detail);
+            Bitmap bmp=getBitmapFromDrawable(eat.pic);
+            ByteArrayOutputStream os = new ByteArrayOutputStream();
+            bmp.compress(Bitmap.CompressFormat.PNG,100,os);
+            values.put("image",os.toByteArray());
+            db.insert("eat_list","id",values);
+            publishProgress(1);
+            return 1;
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... i) {
+            refreshEat();
+        }
     }
 
     private String[] getWeekDays() {

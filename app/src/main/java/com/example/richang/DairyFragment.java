@@ -15,6 +15,7 @@ import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -186,6 +187,7 @@ public class DairyFragment extends Fragment {
 
         lv_text.setAdapter(textAdapter);
         lv_pic.setAdapter(picAdapter);
+        textAdapter.df=this;
         refreshDairy();
         return view;
     }
@@ -275,7 +277,7 @@ public class DairyFragment extends Fragment {
 
                     DairyPic item=new DairyPic(pic,mdate,datetime);
                     addDairyPic(item);
-                    refreshDairyPic();
+                    //refreshDairyPic(); 异步刷新
 
                     createDairyPicDialog.dismiss();
                 }
@@ -298,14 +300,33 @@ public class DairyFragment extends Fragment {
         db.insert("dairy_text","id",values);
     }
     public void addDairyPic(DairyPic dairyPic){
-        ContentValues values=new ContentValues();
-        values.put("date",dairyPic.date);
-        values.put("writeTime",dairyPic.createTime);
-        Bitmap bm=getBitmapFromDrawable(dairyPic.image);
-        ByteArrayOutputStream os = new ByteArrayOutputStream();
-        bm.compress(Bitmap.CompressFormat.PNG,100,os);
-        values.put("image",os.toByteArray());
-        db.insert("dairy_pic","id",values);
+        new InsetDairyPicTask().execute(dairyPic);
+    }
+    private class InsetDairyPicTask extends AsyncTask<DairyPic,Integer,Integer>{
+        @Override
+        protected Integer doInBackground(DairyPic[] objects) {
+            DairyPic dairyPic=objects[0];
+            ContentValues values=new ContentValues();
+            values.put("date",dairyPic.date);
+            values.put("writeTime",dairyPic.createTime);
+            Bitmap bm=getBitmapFromDrawable(dairyPic.image);
+            ByteArrayOutputStream os = new ByteArrayOutputStream();
+            bm.compress(Bitmap.CompressFormat.PNG,100,os);
+            values.put("image",os.toByteArray());
+            db.insert("dairy_pic","id",values);
+            publishProgress(1);
+            return 1;
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... i) {
+           refreshDairyPic();
+        }
+
+        @Override
+        protected void onPostExecute(Integer integer) {
+            refreshDairyPic();
+        }
     }
     public void refreshDairy() {
         picData.clear();
