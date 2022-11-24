@@ -49,10 +49,9 @@
 
     <ImageButton
         android:id="@+id/btn_eat_item_delete"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_gravity="center"
         android:layout_margin="10dp"
-        android:scaleType="center"
-        android:src="@mipmap/eat_delete" />
+        android:background="@mipmap/eat_delete" />
 </LinearLayout>
