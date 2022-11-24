@@ -6,12 +6,6 @@
     android:layout_height="wrap_content"
     android:minHeight="60dp"
     android:orientation="horizontal">
-    <ImageView
-        android:layout_marginLeft="10dp"
-        android:layout_gravity="center"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:src="@mipmap/todo_icon"/>
     <Button
         android:id="@+id/btn_todo_done"
         android:layout_width="0dp"
@@ -53,5 +47,13 @@
             android:text="2022年10月17日"/>
 
     </LinearLayout>
+    <ImageView
+        android:id="@+id/todo_item_late"
+        android:layout_marginLeft="10dp"
+        android:layout_gravity="center"
+        android:layout_width="35dp"
+        android:layout_marginRight="25dp"
+        android:layout_height="35dp"
+        android:background="@color/background"/>
 
 </LinearLayout>

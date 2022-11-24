@@ -168,7 +168,7 @@ public class TodoFragment extends Fragment {
         adapter.notifyDataSetChanged();
     }
     public void readAllTodo(){
-        Cursor cursor=db.query("list",new String[]{"name","date"},null,null,null,null,"id ASC",null);
+        Cursor cursor=db.query("list",new String[]{"name","date"},null,null,null,null,"date ASC",null);
         while(cursor.moveToNext()){
             String name=cursor.getString(0);
             String date=cursor.getString(1);
@@ -180,7 +180,7 @@ public class TodoFragment extends Fragment {
     public void readDayTodo(){
         Cursor cursor=db.query("list",new String[]{"name","date"},
                 "date=?" ,
-                new String[]{curdate},null,null,"id ASC",null);
+                new String[]{curdate},null,null,"date ASC",null);
         while(cursor.moveToNext()){
             String name=cursor.getString(0);
             String date=cursor.getString(1);
@@ -192,7 +192,7 @@ public class TodoFragment extends Fragment {
     public void readWeekTodo(){
         Cursor cursor=db.query("list",new String[]{"name","date"},
                 "date = ? OR "+"date = ? OR "+"date = ? OR "+"date = ? OR "+"date = ? OR "+"date = ? OR "+"date = ?",
-                weekdays,null,null,"id ASC",null);
+                weekdays,null,null,"date ASC",null);
         while(cursor.moveToNext()){
             String name=cursor.getString(0);
             String date=cursor.getString(1);
@@ -204,7 +204,7 @@ public class TodoFragment extends Fragment {
     public void readMonthTodo(){
         Cursor cursor=db.query("list",new String[]{"name","date"},
                 "date like ?" ,
-                new String[]{m_year+"/"+(m_month+1)+"/"+"%"},null,null,"id ASC",null);
+                new String[]{m_year+"/"+(m_month+1)+"/"+"%"},null,null,"date ASC",null);
         while(cursor.moveToNext()){
             String name=cursor.getString(0);
             String date=cursor.getString(1);

@@ -11,6 +11,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -41,6 +42,10 @@ public class TodoAdapter extends ArrayAdapter<Todo> {
         Button btn=view.findViewById(R.id.btn_todo_done);
         tv_date.setText(todo.date);
         tv_name.setText(todo.name);
+        ImageView star=view.findViewById(R.id.todo_item_late);
+        if(todo.date.compareTo(MainActivity.getCurDate())<0){
+            star.setBackgroundResource(R.mipmap.todo_late);
+        }
 
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
