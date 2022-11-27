@@ -7,7 +7,6 @@ import android.graphics.drawable.Drawable;
 public class Eat {
 //    java.util.Date date = new java.util.Date();
 //    long datetime = date.getTime();
-
     public Drawable pic;
     public String title;
     public String detail;

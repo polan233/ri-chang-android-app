@@ -180,7 +180,6 @@ public class EatFragment extends Fragment {
             }
         });
         createEatDialog.show();
-
     }
 
 
@@ -259,7 +258,7 @@ public class EatFragment extends Fragment {
         }
         return list;
     }
-    //调用Activity的showDialog( )方法显示进对话框
+
     protected Dialog CreateDialog(Context context, int id) {
         return new DatePickerDialog(context,l1,m_year, m_month, m_day);
     }

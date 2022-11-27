@@ -50,12 +50,6 @@ public class TodoAdapter extends ArrayAdapter<Todo> {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                if(ll !=null){
-//                    ObjectAnimator animation=ObjectAnimator.ofFloat(ll,"translationX",1000f);
-//                    animation.setDuration(100000);
-//                    animation.start();
-//                    while(animation.isRunning()){};
-//                }
                 btn.setText("☑");
                 ObjectAnimator animation1=ObjectAnimator.ofFloat(ll,"scaleX",0f);
                 ObjectAnimator animation2=ObjectAnimator.ofFloat(ll,"translationX",-1000);
@@ -63,7 +57,7 @@ public class TodoAdapter extends ArrayAdapter<Todo> {
                 animation2.setDuration(600);
                 animation1.start();
                 animation2.start();
-                //TODO 这里就可以加一些动画效果啦
+
 
                 Handler handler = new Handler(); // 如果这个handler是在UI线程中创建的
                 handler.postDelayed(new Runnable() {  // 开启的runnable也会在这个handler所依附线程中运行，即主线程

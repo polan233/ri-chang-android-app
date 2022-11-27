@@ -73,7 +73,6 @@ public class EatAdapter extends ArrayAdapter<Eat> {
                         // 可更新UI或做其他事情
                         // 注意这里还在当前线程，没有开启新的线程
                         // new Runnable(){}，只是把Runnable对象以Message形式post到UI线程里的Looper中执行，并没有新开线程。
-                        //TODO 想一个合适的主键,还是需要实时更新数据库的
                         deleteEat(eat);
                         data.remove(position);
                         notifyDataSetChanged();

@@ -64,7 +64,7 @@ public class DairyTextAdapter extends ArrayAdapter<DairyText> {
                     builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            //TODO 删除
+                            //删除
                             deleteDairyText(dt);
                             df.refreshDairyText();
                         }
@@ -109,7 +109,7 @@ public class DairyTextAdapter extends ArrayAdapter<DairyText> {
             ib.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    //TODO 按下按钮生成添加文字的界面
+                    //按下按钮生成添加文字的界面
                     if(meditListener!=null){
                         meditListener.onTextEdit();
                     }

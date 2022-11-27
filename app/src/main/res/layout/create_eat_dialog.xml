@@ -38,7 +38,7 @@
             android:layout_marginBottom="5dp"
             android:layout_toRightOf="@+id/ib_create_eat"
             android:background="@color/background_solid"
-            android:elevation="3dp"
+            android:elevation="0dp"
             android:hint="点击输入标题"
             android:padding="8dp"
             android:textSize="18sp"
@@ -53,7 +53,7 @@
             android:layout_alignStart="@+id/et_create_eat_title"
             android:layout_alignEnd="@+id/et_create_eat_title"
 
-            android:elevation="3dp"
+            android:elevation="0dp"
             android:layout_marginBottom="8dp"
             android:paddingTop="5dp"
             android:paddingBottom="15dp"

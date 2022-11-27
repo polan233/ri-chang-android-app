@@ -36,7 +36,7 @@ public class CreateDairyTextDialog extends Dialog {
     public EditText et_content;
     private Calendar c;//获得日历实例
     private int m_year,m_month,m_day,m_weekday;
-    private String[] weekCharactor = new String[]{"一", "二", "三", "四", "五", "六", "日"};
+    private String[] weekCharactor = new String[]{"日","一", "二", "三", "四", "五", "六"};
     private String[] weekdays;
 
     public Drawable image=null;

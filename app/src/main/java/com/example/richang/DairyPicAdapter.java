@@ -74,7 +74,7 @@ public class DairyPicAdapter extends ArrayAdapter<DairyPic> {
                     builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            //TODO 删除
+                            //删除
                             deleteDairyPic(dp);
                             data.remove(position);
                             notifyDataSetChanged();
@@ -93,7 +93,7 @@ public class DairyPicAdapter extends ArrayAdapter<DairyPic> {
             ib.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    //TODO 添加图片的代码
+                    //添加图片的代码
                     if(meditListener!=null)
                         meditListener.onPicEdit();
                 }

@@ -78,7 +78,7 @@ public class DairyFragment extends Fragment {
 
     private ListView lv_pic;
     private ListView lv_text;
-    private DairyTextAdapter textAdapter; //TODO 这个类也要改
+    private DairyTextAdapter textAdapter;
     private DairyPicAdapter picAdapter;
     private List<DairyText> textData = new ArrayList<>();
     private List<DairyPic> picData = new ArrayList<>();
@@ -220,7 +220,7 @@ public class DairyFragment extends Fragment {
         createDairyPicDialog = new CreateDairyPicDialog((MainActivity) getActivity(), R.style.CustomDialog,
                 new View.OnClickListener() {
                     @Override
-                    public void onClick(View v) { //TODO 从相册获取图片
+                    public void onClick(View v) { //从相册获取图片
                         if (ContextCompat.checkSelfPermission(getActivity(),
                                 Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED){
 
@@ -232,7 +232,7 @@ public class DairyFragment extends Fragment {
                     }
                 }, new View.OnClickListener() {
             @Override
-            public void onClick(View v) {   //TODO 从相机获取图片
+            public void onClick(View v) {   //从相机获取图片
                 // 创建File对象，用于存储拍照后的图片
                 //存放在手机SD卡的应用关联缓存目录下
                 File outputImage = new File(getActivity().getExternalCacheDir(), "output_image.jpg");
@@ -328,7 +328,7 @@ public class DairyFragment extends Fragment {
         picData.clear();
         textData.clear();
         readPicByDate(curdate);
-        readTextByDate(curdate);  //TODO 判断日期是不是今天,是的话就把添加按钮加进去
+        readTextByDate(curdate);  //判断日期是不是今天,是的话就把添加按钮加进去
     }
     public void refreshDairyText() {
         textData.clear();

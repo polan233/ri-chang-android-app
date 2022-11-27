@@ -51,7 +51,7 @@ public class MainActivity extends FragmentActivity {
 
     private Calendar c;//获得日历实例
     private int m_year,m_month,m_day,m_weekday;
-    public static String[] weekCharactor=new String[]{"一","二","三","四","五","六","日"};
+    public static String[] weekCharactor=new String[]{"日","一","二","三","四","五","六"};
 
     private TodoFragment todoFragment;
     private EatFragment eatFragment=null;
@@ -456,10 +456,6 @@ public class MainActivity extends FragmentActivity {
         nav_eat.setSelected(false);
         nav_habit.setSelected(false);
         nav_dairy.setSelected(false);
-//        nav_todo.setBackgroundColor(themeColors[curThemeColor]);
-//        nav_eat.setBackgroundColor(themeColors[curThemeColor]);
-//        nav_habit.setBackgroundColor(themeColors[curThemeColor]);
-//        nav_dairy.setBackgroundColor(themeColors[curThemeColor]);
 
         switch (resId){
             case R.id.tv_todo:
