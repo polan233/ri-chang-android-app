@@ -324,10 +324,26 @@ public class DairyFragment extends Fragment {
         }
 
     }
+
+    private class LoadPicTask extends AsyncTask<String,Integer,Integer>{
+        @Override
+        protected Integer doInBackground(String... strings) {
+            String date=strings[0];
+            readPicByDate(date);
+            publishProgress(1);
+            return null;
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... values) {
+            picAdapter.notifyDataSetChanged();
+        }
+    }
     public void refreshDairy() {
         picData.clear();
         textData.clear();
-        readPicByDate(curdate);
+        new LoadPicTask().execute(curdate);
+        //readPicByDate(curdate);
         readTextByDate(curdate);  //判断日期是不是今天,是的话就把添加按钮加进去
     }
     public void refreshDairyText() {
@@ -336,8 +352,10 @@ public class DairyFragment extends Fragment {
     }
     public void refreshDairyPic() {
         picData.clear();
-        readPicByDate(curdate);
+        //readPicByDate(curdate);
+        new LoadPicTask().execute(curdate);
     }
+
 
     public void readPicByDate(String date) {
         Cursor cursor = db.query("dairy_pic", new String[]{"date", "writeTime", "image"},
@@ -355,7 +373,6 @@ public class DairyFragment extends Fragment {
         if(date.equals(todayDate)){
             picData.add(new DairyPic(DairyPic.TYPE_BUTTON));
         }
-        picAdapter.notifyDataSetChanged();
     }
 
     public void readTextByDate(String date) {
