@@ -192,11 +192,28 @@ public class EatFragment extends Fragment {
         switch (eatSelected){
             case R.id.rb_eat_now:
                 tv_curdate.setText(todaydate);
-                readEatByDate(todaydate);
+                //readEatByDate(todaydate);
+                new LoadEatTask().execute(todaydate);
                 break;
             case R.id.rb_eat_pre:
-                readEatByDate(curdate);
+                //readEatByDate(curdate);
+                new LoadEatTask().execute(curdate);
                 break;
+        }
+    }
+
+    private class LoadEatTask extends AsyncTask<String,Integer,Integer>{
+        @Override
+        protected Integer doInBackground(String... dates) {
+            String date=dates[0];
+            readEatByDate(date);
+            publishProgress(1);
+            return null;
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... values) {
+            adapter.notifyDataSetChanged();
         }
     }
 
@@ -214,7 +231,6 @@ public class EatFragment extends Fragment {
             data.add(new Eat(image,title,detail,createTime));
         }
         cursor.close();
-        adapter.notifyDataSetChanged();
     }
     public void addEat(Eat eat){
        new InsetEatPicTask().execute(eat);
